@@ -1,0 +1,16 @@
+{
+  "name": "ia-reviews-api",
+  "version": "1.0.0",
+  "description": "Esta API está diseñada para realizar el scraping de la página de un producto de Amazon y generar un resumen utilizando técnicas de IA. La API expone un endpoint `/producto` al que se le puede enviar una solicitud con la URL del producto de Amazon. A continuación, se realiza el scraping de la página del producto para extraer todas las reseñas y se utiliza IA para generar un resumen de las mismas. El resumen generado se devuelve como respuesta de la API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "puppeteer": "^20.8.0"
+  }
+}
