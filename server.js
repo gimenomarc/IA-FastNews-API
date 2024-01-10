@@ -12,7 +12,7 @@ const parser = new Parser();
 
 app.get('/noticias', async (req, res) => {
   try {
-    const rssFeedUrl = 'https://es.wired.com/feed/rss'; // URL del feed RSS de Wired
+    const rssFeedUrl = 'https://www.gadgets360.com/rss/apps/feeds'; // URL del feed RSS de Wired
 
     // Obtener noticias del feed RSS
     const feed = await parser.parseURL(rssFeedUrl);
