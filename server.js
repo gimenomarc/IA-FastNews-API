@@ -1,25 +1,25 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
+const Parser = require('rss-parser');
+const cors = require('cors');
 
 const app = express();
 
-app.get('/producto', async (req, res) => {
+app.use(cors());
+
+// Inicializar el parser de RSS
+const parser = new Parser();
+
+app.get('/noticias', async (req, res) => {
   try {
-    const url = req.query.url; 
+    const rssFeedUrl = 'https://es.wired.com/feed/rss'; // URL del feed RSS de Wired
 
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(url);
+    // Obtener noticias del feed RSS
+    const feed = await parser.parseURL(rssFeedUrl);
+    const news = feed.items;
 
-    const stateObject = await page.$eval('span#cr-state-object', (element) => element.getAttribute('data-state'));
-    const stateData = JSON.parse(stateObject);
-
-    const rating = stateData['averageStarRating'];
-    const reviewCount = stateData['totalReviewCount'];
-
-    await browser.close();
-
-    res.json({ rating, reviewCount });
+    // Enviar las noticias al frontend
+    res.json(news);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error en el servidor' });
